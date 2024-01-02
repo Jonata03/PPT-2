@@ -1,9 +1,18 @@
 Documentaçao de atividade 2
 
 AWS
-**configuração do rds**
+**Criação do rds**
 
-**configuraçao do efs**
+**Criação do efs**:<br>
+vá na barra de pesquisa busque pelo serviço nfs, clique em criar sistema de arquivos e em personalizar, segue as configurações usadas:
+tipo de sistema: regional
+backups automaticos: desabilitados
+ciclo de vida, mantém padrao
+criptografia: desabilitada
+modo de taxa de transferência avançado e elastic
+rede:selecionada a mesma vpc padrao do projeto com as duas zonas selecionadas
+
+
 
 **configuração dos security groups**
 No total usados foram 3 securitys groups para evitar conflitos com portas e regras.

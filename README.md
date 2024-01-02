@@ -1,17 +1,28 @@
 Documentaçao de atividade 2
 
-aws
-configuração do rds
-configuraçao do efs
-configuração dos security groups
-configuraçao do load balancer
-configuração do auto scaling
+AWS
+**configuração do rds**
 
-instancia ec2
+**configuraçao do efs**
 
-dokcer
+**configuração dos security groups**
+No total usados foram 3 securitys groups para evitar conflitos com portas e regras.
 
-container
+Security group para o **load balancer**: Regras de entrada e saida para a porta 80 com origem de todo ipv4
+  
+Security group para **instâncias ec2**: Regras de entrada e saida na porta 22 com origem de meu ip, porta 80 com origem do security group do load balancer.<br>
+    
+Security group para **RDS**: Regras de entrada e saida na porta 3306 com o origem de todo ipv4
+
+**configuraçao do load balancer**
+
+**configuração do auto scaling**
+
+**instancia ec2**
+
+DOCKER
+
+container 
 
 
 instalação do docker-compose

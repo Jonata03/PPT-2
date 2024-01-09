@@ -2,6 +2,20 @@ Documentaçao de atividade 2
 
 AWS
 **Criação da VPC**<br>
+Busque pelo serviço de VPC e selecione "Criar VPC" segue as configurações utilizadas.<br>
+Recursos a serem criados: VPC e muito mais;<br>
+Geração automática da etiqueta de nome: habilitado; <br>
+Atribua um nome as etiquetas;<br>
+Bloco CIDR IPv4: 10.0.0.0/16;<br>
+Nenhum bloco CIDR IPv6;<br>
+Locação: Padrão;<br>
+Número de AZs: 2;<br>
+Número de sub-redes públicas: 2;<br>
+Número de sub-redes privadas: 2;<br>
+Gateways NAT(USD): 1 por AZ;<br>
+Endpoints da VPC: nenhum;<br>
+Habilitar nomes de host DNS: habilitado;<br>
+Habilitar resolução de DNS: habilitado;<br>
 
 **configuração dos security groups**<br>
 No total usados foram 3 securitys groups para evitar conflitos com portas e regras.<br>

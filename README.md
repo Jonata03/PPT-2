@@ -128,10 +128,21 @@ Ainda no serviço EC2 na aba ao lado busque por Auto Scaling Group que estara na
 configuração:
 De um nome ao auto scalling;<br>
 clique em "Criar um modelo de execução";<br>
-**configurações do modelo de execução**
-De um nome e uma descriao ao modelo;
+**configurações do modelo de execução**<br>
+De um nome e uma descriao ao modelo;<br>
 Fornecer orientação para me ajudar a configurar um modelo que eu possa usar com o Auto Scaling do EC2: habilitado;<br>
-Minha AMIs e selecione a imagem criada anteriormente;
+Minha AMIs e selecione a imagem criada anteriormente;<br>
+Tipo de instancia: t2.micro;<br>
+Par de chaves: selecione a mesma par de chave ja criada;<br>
+sub-rede: escolha uma sub-rede publica na regiao desejada;<br>
+Grupos de segurança: security group criado anteriormente para instâncias ec2 e RDS, selecione os 2 security group;<br>
+volume: mantem padrão;<br>
+Retorne para a aba do navegador de estavamos criando o auto scaling;
+clique na seta circular que esta ao lado do modelo de execuçao para recarregar os modelos;
+selecione o modelo recem criado e em "proximo";
+em VPC escolha a vpc que estamos usando para o projeto;
+zonas de disponibilidade e sub-redes: selecione todas as publicas;
+
 
 DOCKER
 

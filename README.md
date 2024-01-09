@@ -92,10 +92,20 @@ Selecione a VPC;<br>
 Grupo de segurança: selecione apenas o próprio security group criado para o load balancer;<br>
 Listener: protocolo http porta 80 grupo de destino criado anteriormente;<br>
 AWS Global Accelerator: destivado;<br>
+nas configurações de rede clique em "Editar"
+selecione a vpc criada anteriormente;
+uma subnet publica na regiao desejada;
+atribuir IP público automaticamente: Habilitado;
+grupos de segurança: 
+**instancia ec2**<br>
+Busque pelo serviço EC2, vá em "Instâncias" e em "Executar Instâncias"
+criando instância:
+Adicione as tags necessarias;
+Em inicio rápido selecione Amazon Linux AWS;
+tipo de instância: t2.micro;
+Em par de chaves selecione "Criar novo par de chaves", de um nome ,tipo RSA e em formato .pem(faça o dowload e deixe na sua maquina);
 
 **configuração do auto scaling**<br>
-
-**instancia ec2**<br>
 
 DOCKER
 

@@ -13,9 +13,38 @@ Security group para **instâncias ec2**: Regras de entrada e saida na porta 22 c
 Security group para **RDS**: Regras de entrada e saida na porta 3306 com o origem de todo ipv4<br>
 
 **Criação do rds**<br>
+Busque pelo serviço de RDS, selecione "Banco de dados" e "Criar banco de dados", segue as configurações:<br>
+Método de criação padrão;<br>
+Mecanismo de MySQL;<br>
+Mostrar versões compatíveis com o cluster de banco de dados Multi-AZ: Desabilitado;<br>
+Mostrar versões compatíveis com as gravações otimizadas do Amazon RDS: Desabilitado;<br>
+Versão: MySQL 8.0.31;<br>
+Modelo: Nivel gratuito;<br>
+De um nome de identificação, usuario e senha;<br>
+Mostrar classes de instância compatíveis com gravações otimizadas do Amazon RDS: Desabilitado;<br>
+Incluir as classes de geração anteriores: Desabilitado;<br>
+Classe:  db.t3.micro;<br>
+Tipo armazenamento: SSD de uso geral (gp2);<br>
+Armazenamento: alocado 20 gb;<br>
+Não conectar a um recurso de computação do EC2;<br>
+Tipo de rede: IPv4;<br>
+VPC: mesma criada no inicio;<br>
+Sub-rede de banco de dados: default;<br>
+Acesso público: sim;<br>
+Grupo de segurança: apenas o grupo de segurança criado para o RDS;<br>
+Zona de disponiblidade: Sem preferência;<br>
+Sem proxy;<br>
+porta do banco de dados: 3306;<br>
+Autentificação por senha;<br>
+De um nome ao banco de dados;<br>
+Grupo de parâmetros do banco de dados: Default;<br>
+Grupo de opções: Default;<br>
+Sem backup e criptografia;<br>
+Proteção contra exclusão: Habilitado;<br>
+Pontos de Atenção: ficar atento ao identificador do DB, Senha, VPC, Segurity group e ao nome do banco de dados.<br>
 
-**Criação do efs**:<br>
-vá na barra de pesquisa busque pelo serviço nfs, clique em criar sistema de arquivos e em personalizar, segue as configurações usadas:
+<br>**Criação do efs**:<br>
+Busque pelo serviço nfs, clique em criar sistema de arquivos e em personalizar, segue as configurações usadas:
 tipo de sistema: regional<br>
 backups automaticos: desabilitados<br>
 ciclo de vida, mantém padrao<br>

@@ -22,7 +22,7 @@ No total usados foram 3 securitys groups para evitar conflitos com portas e regr
 
 Security group para o **load balancer**: Regras de entrada e saida para a porta 80 com origem de todo ipv4.<br>
   
-Security group para **instâncias ec2**: Regras de entrada e saida na porta 22 com origem de meu ip, porta 80 com origem do security group do load balancer.<br>
+Security group para **instâncias ec2**: Regras de entrada e saida na porta 22 com origem de qualquer IPv4, porta 80 com origem do security group do load balancer.<br>
     
 Security group para **RDS**: Regras de entrada e saida na porta 3306 com o origem de todo ipv4<br>
 
@@ -92,18 +92,30 @@ Selecione a VPC;<br>
 Grupo de segurança: selecione apenas o próprio security group criado para o load balancer;<br>
 Listener: protocolo http porta 80 grupo de destino criado anteriormente;<br>
 AWS Global Accelerator: destivado;<br>
-nas configurações de rede clique em "Editar"
-selecione a vpc criada anteriormente;
-uma subnet publica na regiao desejada;
-atribuir IP público automaticamente: Habilitado;
-grupos de segurança: 
+
 **instancia ec2**<br>
-Busque pelo serviço EC2, vá em "Instâncias" e em "Executar Instâncias"
-criando instância:
-Adicione as tags necessarias;
-Em inicio rápido selecione Amazon Linux AWS;
-tipo de instância: t2.micro;
-Em par de chaves selecione "Criar novo par de chaves", de um nome ,tipo RSA e em formato .pem(faça o dowload e deixe na sua maquina);
+Busque pelo serviço EC2, vá em "Instâncias" e em "Executar Instâncias"<br>
+Criando instância:<br>
+Adicione as tags necessarias;<br>
+Em inicio rápido selecione Amazon Linux AWS;<br>
+Tipo de instância: t2.micro;<br>
+Em par de chaves selecione "Criar novo par de chaves", de um nome ,tipo RSA e em formato .pem(faça o dowload e deixe na sua maquina);<br>
+Nas configurações de rede clique em "Editar";<br>
+Selecione a vpc criada anteriormente;<br>
+Uma subnet publica na regiao desejada;<br>
+Atribuir IP público automaticamente: Habilitado;<br>
+Grupos de segurança: security group criado anteriormente para instâncias ec2 e RDS, selecione os 2 security group;<br>
+As configuraçoes apartir do armazenamento foi mantido no padrão;<br>
+Na parte inferior da ultima aba de configuração havera um quadrado pra digitar algum script, segue o script usado para ja iniciar a intância configurada;<br>
+<br>*#!/bin/bash<br>
+sudo yum update -y<br>
+sudo yum install -y docker<br>
+sudo service docker start<br>
+sudo systemctl enable docker<br>
+sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose<br>
+sudo chmod +x /usr/local/bin/docker-compose<br>
+docker --version<br>
+docker-compose --version*<br>
 
 **configuração do auto scaling**<br>
 

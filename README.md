@@ -1,6 +1,6 @@
-Documentaçao de atividade 2
+Documentaçao de atividade 2<br>
 
-AWS
+AWS<br>
 **Criação da VPC**<br>
 Busque pelo serviço de VPC e selecione "Criar VPC" segue as configurações utilizadas.<br>
 Recursos a serem criados: VPC e muito mais;<br>
@@ -17,7 +17,7 @@ Endpoints da VPC: nenhum;<br>
 Habilitar nomes de host DNS: habilitado;<br>
 Habilitar resolução de DNS: habilitado;<br>
 
-**configuração dos security groups**<br>
+**Configuração dos security groups**<br>
 No total usados foram 3 securitys groups para evitar conflitos com portas e regras.<br>
 
 Security group para o **load balancer**: Regras de entrada e saida para a porta 80 com origem de todo ipv4.<br>
@@ -26,7 +26,7 @@ Security group para **instâncias ec2**: Regras de entrada e saida na porta 22 c
     
 Security group para **RDS**: Regras de entrada e saida na porta 3306 com o origem de todo ipv4<br>
 
-**Criação do rds**<br>
+**Criação do RDS**<br>
 Busque pelo serviço de RDS, selecione "Banco de dados" e "Criar banco de dados", segue as configurações:<br>
 Método de criação padrão;<br>
 Mecanismo de MySQL;<br>
@@ -66,34 +66,7 @@ criptografia: desabilitada<br>
 modo de taxa de transferência avançado e elastic<br>
 rede:selecionada a mesma vpc padrao do projeto com as duas zonas selecionadas<br>
 
-**configuraçao do load balancer**<br>
-busque pelo serviço de ec2 e va até balanceadores de carga;<br>
-obs: para o load balancer funcionar com o Auto Scaling, foi mudado de classic para application load balancer;<br>
-Na aba ao lado clique em grupos de destino e em criar grupo de destino; <br>
-configurações do **grupo de destino**:<br>
-tipo de destino: instâncias;<br>
-de um nome ao grupo de destino;<br>
-Protocolo: HTTP Porta: 80;<br>
-Tipo de endereço IP: IPv4;<br>
-VPC: mesma criada anteriormente;<br>
-Versão dos protocolo: HTTP1;<br>
-Protocolo da verificação de integridade: HTTP;<br>
-Caminho da verificação de integridade: /;<br>
-Configurações avançadas de verificação de integridade sao os padrões;<br>
-Selecione as intâncias e as adicione na porta 80;<br>
-
-<br>Na mesma aba ao lado selecione "Load Balancer" e em "criar load balancer".<br>
-Configurações: <br>
-Crie um application Load Balancer;<br>
-De um nome ao load balancer;<br>
-Voltado a internet;<br>
-Tipo de endereço IP IPv4;<br>
-Selecione a VPC;<br>
-Grupo de segurança: selecione apenas o próprio security group criado para o load balancer;<br>
-Listener: protocolo http porta 80 grupo de destino criado anteriormente;<br>
-AWS Global Accelerator: destivado;<br>
-
-**instancia ec2**<br>
+**Instância ec2**<br>
 Busque pelo serviço EC2, vá em "Instâncias" e em "Executar Instâncias"<br>
 Criando instância:<br>
 Adicione as tags necessarias;<br>
@@ -117,7 +90,48 @@ sudo chmod +x /usr/local/bin/docker-compose<br>
 docker --version<br>
 docker-compose --version*<br>
 
+**Configuraçao do load balancer**<br>
+Busque pelo serviço de ec2 e va até balanceadores de carga;<br>
+Bbs: para o load balancer funcionar com o Auto Scaling, foi mudado de classic para application load balancer;<br>
+Na aba ao lado clique em grupos de destino e em criar grupo de destino; <br>
+Configurações do **grupo de destino**:<br>
+Tipo de destino: instâncias;<br>
+De um nome ao grupo de destino;<br>
+Protocolo: HTTP Porta: 80;<br>
+Tipo de endereço IP: IPv4;<br>
+VPC: mesma criada anteriormente;<br>
+Versão dos protocolo: HTTP1;<br>
+Protocolo da verificação de integridade: HTTP;<br>
+Caminho da verificação de integridade: /;<br>
+Configurações avançadas de verificação de integridade sao os padrões;<br>
+Selecione as intâncias e as adicione na porta 80;<br>
+
+Na mesma aba ao lado selecione "Load Balancer" e em "criar load balancer".<br>
+Configurações: <br>
+Crie um application Load Balancer;<br>
+De um nome ao load balancer;<br>
+Voltado a internet;<br>
+Tipo de endereço IP IPv4;<br>
+Selecione a VPC;<br>
+Grupo de segurança: selecione apenas o próprio security group criado para o load balancer;<br>
+Listener: protocolo http porta 80 grupo de destino criado anteriormente;<br>
+AWS Global Accelerator: destivado;<br>
+<br>**Crie uma imagem da instância**<br>
+Ainda na aba de instâncias, clique em "Ações","Imagem e modelo" e "Criar imagem";<br>
+De um nome e uma descrição a imagem;<br>
+Não reinicializar: habilitado;<br>
+Volume: mantido no padrão;<br>
+Marcar imagem e snapshots juntos;<br>
+
 **configuração do auto scaling**<br>
+Ainda no serviço EC2 na aba ao lado busque por Auto Scaling Group que estara na ultima opção, ao entrar clique em "Criar grupo de Auto Scaling";<br>
+configuração:
+De um nome ao auto scalling;<br>
+clique em "Criar um modelo de execução";<br>
+**configurações do modelo de execução**
+De um nome e uma descriao ao modelo;
+Fornecer orientação para me ajudar a configurar um modelo que eu possa usar com o Auto Scaling do EC2: habilitado;<br>
+Minha AMIs e selecione a imagem criada anteriormente;
 
 DOCKER
 

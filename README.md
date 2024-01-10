@@ -61,15 +61,7 @@ Sem backup e criptografia;<br>
 Proteção contra exclusão: Habilitado;<br>
 Pontos de Atenção: ficar atento ao identificador do DB, Senha, VPC, Segurity group e ao nome do banco de dados.<br>
 ---
-### Criação do efs
-Busque pelo serviço NFS, clique em "Criar sistema de arquivos" e em "Personalizar", segue as configurações usadas:
-> tipo de sistema: regional<br>
-backups automaticos: desabilitados<br>
-ciclo de vida, mantém padrao<br>
-criptografia: desabilitada<br>
-modo de taxa de transferência avançado e elastic<br>
-rede:selecionada a mesma vpc padrao do projeto com as duas zonas selecionadas<br>
----
+
 ### Instância ec2 
 Busque pelo serviço EC2, vá em "Instâncias" e em "Executar Instâncias"<br>
 > Criando instância:<br>
@@ -107,7 +99,25 @@ Ainda na aba de instâncias, selecione a instância, clique em "Ações","Imagem
 Não reinicializar: habilitado;<br>
 Volume: mantido no padrão;<br>
 Marcar imagem e snapshots juntos;<br>
+---
+### Criação do EFS
+Busque pelo serviço NFS, clique em "Criar sistema de arquivos" e em "Personalizar", segue as configurações usadas:
+> tipo de sistema: regional<br>
+backups automaticos: desabilitados<br>
+ciclo de vida, mantém padrao<br>
+criptografia: desabilitada<br>
+modo de taxa de transferência avançado e elastic<br>
+rede:selecionada a mesma vpc padrao do projeto com as duas zonas selecionadas<br>
 
+Conecte-se com sua intância EC2 e entre com usuario root, use o comando 
+```
+mkdir /efs
+```
+para criar um diretorio no onde sera possivel montar o serviço NFS, em seguida selecione seu EFS e clique 
+em "Anexar" copie o codigo e cole no terminal da sua intância, o comando é algo semelhante a
+``` 
+sudo mount -t nfs4 -o nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2,noresvport URL:/ /efs
+```
 ---
 ### Configuraçao do load balancer
 Busque pelo serviço de ec2 e vá até "Balanceadores de carga";
@@ -153,26 +163,26 @@ Par de chaves: selecione a mesma par de chave ja criada;<br>
 sub-rede: escolha uma sub-rede publica na regiao desejada;<br>
 Grupos de segurança: security group criado anteriormente para instâncias ec2 e RDS, selecione os 2 security group;<br>
 volume: mantem padrão;<br>
-Retorne para a aba do navegador de estavamos criando o auto scaling;
-clique na seta circular que esta ao lado do modelo de execuçao para recarregar os modelos;
-selecione o modelo recem criado e em "proximo";
-em VPC escolha a vpc que estamos usando para o projeto;
-zonas de disponibilidade e sub-redes: selecione todas as publicas;
-Anexar a um balanceador de carga existente;
-Escolha entre seus grupos de destino de balanceador de carga;
-Grupos de destino de balanceador de carga existentes: selecione o load balancing que ja havia sido criado;
-Serviço VPC Lattice não disponível;
-Ative as verificações de integridade do Elastic Load Balancing: Habilitado;
-Período de tolerância da verificação de integridade: 300 segundos;
-Habilitar coleta de métricas de grupo no CloudWatch: Desabilitado
-Habilitar aquecimento de instâncias padrão: Desabilitado;
-Capacidade desejada: 1;
-Capacidade mínima desejada: 1
-Capacidade máxima desejada: 5
-Ajuste de escala automática: Nenhuma política;
-Proteção contra redução da escala de instâncias na horizontal: Desabilitado;
-Sem notifição;
-Sem tags;
+Retorne para a aba do navegador de estavamos criando o auto scaling;<br>
+clique na seta circular que esta ao lado do modelo de execuçao para recarregar os modelos;<br>
+selecione o modelo recem criado e em "proximo";<br>
+em VPC escolha a vpc que estamos usando para o projeto;<br>
+zonas de disponibilidade e sub-redes: selecione todas as publicas;<br>
+Anexar a um balanceador de carga existente;<br>
+Escolha entre seus grupos de destino de balanceador de carga;<br>
+Grupos de destino de balanceador de carga existentes: selecione o load balancing que ja havia sido criado;<br>
+Serviço VPC Lattice não disponível;<br>
+Ative as verificações de integridade do Elastic Load Balancing: Habilitado;<br>
+Período de tolerância da verificação de integridade: 300 segundos;<br>
+Habilitar coleta de métricas de grupo no CloudWatch: Desabilitado;<br>
+Habilitar aquecimento de instâncias padrão: Desabilitado;<br>
+Capacidade desejada: 1;<br>
+Capacidade mínima desejada: 1;<br>
+Capacidade máxima desejada: 5;<br>
+Ajuste de escala automática: Nenhuma política;<br>
+Proteção contra redução da escala de instâncias na horizontal: Desabilitado;<br>
+Sem notifição;<br>
+Sem tags;<br>
 
 ---
 
@@ -181,7 +191,3 @@ DOCKER
 container 
 
 
-instalação do docker-compose
-sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose <br>
-sudo chmod +x /usr/local/bin/docker-compose
-docker-compose --version

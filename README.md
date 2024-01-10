@@ -185,9 +185,57 @@ Sem notifição;<br>
 Sem tags;<br>
 
 ---
+## DOCKER
+Conectando-se a sua intância via ssh ou através do console, log com seu usuário root, crie um diretório e com o comando 
+```
+mkdir /docker
+```
+entre no diretorio recem criado com o comando 
+```
+cd /docker/
+```
+crie um arquivo .yml com o editor de texto de sua preferência
+```
+nano docker-compose.yml
+```
+segue o scrip usado para a criação do container
+```
+version: '3'
 
-DOCKER
+services:
+  wordpress:
+    image: wordpress
+    restart: always
+    ports:
+      - "80:80"
+    environment:
+      WORDPRESS_DB_HOST: "rds1-ppt-2.cfeqj2zmbbx7.us-east-1.rds.amazonaws.com"
+      WORDPRESS_DB_USER: "root"
+      WORDPRESS_DB_PASSWORD: "luzia123"
+      WORDPRESS_DB_NAME: "wordpress"
+    volumes:
+      - /efs/wordpress_data:/var/www/html
+volumes:
+  wordpress_data:
+```
+salve e saia, use 
+```
+docker-compose up
+```
+para subir o container, a imagem sera baixada do docker hub então pode ser que demore um pouco.
+  Para acessar pelo navegador o site wordpress va até o load balancing usado no projeto e copie o Nome do DNS
+![Captura de tela 2024-01-10 023521](https://github.com/Jonata03/PPT-2/assets/120826522/2f964a58-ecfd-457c-8c91-d7c4779855a2)
 
-container 
+cole na barra de busca URL do seu navegador, voce sera direcionado para a pagina do de instalação do wordpress segue segue um exemplo de uso
+ escolha um idioma e você será redirecionado para
+
+![Captura de tela 2024-01-10 024926](https://github.com/Jonata03/PPT-2/assets/120826522/5542d842-6dc5-4c5d-b501-4e6cb57c59b6)
+
+preencha as informações como desejado porém lembre das informações usadas
+faça o login 
+
+![Captura de tela 2024-01-10 025919](https://github.com/Jonata03/PPT-2/assets/120826522/637df137-c15d-49cf-aa25-2663d66a309e)
+
+Seu Wordpress foi instalado com sucesso!
 
 

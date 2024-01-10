@@ -69,7 +69,7 @@ ciclo de vida, mantém padrao<br>
 criptografia: desabilitada<br>
 modo de taxa de transferência avançado e elastic<br>
 rede:selecionada a mesma vpc padrao do projeto com as duas zonas selecionadas<br>
-
+---
 ### Instância ec2 
 Busque pelo serviço EC2, vá em "Instâncias" e em "Executar Instâncias"<br>
 > Criando instância:<br>
@@ -101,13 +101,21 @@ sudo chmod +x /usr/local/bin/docker-compose<br>
 docker --version<br>
 docker-compose --version
 ```
+<br>**Crie uma imagem da instância**<br>
+Ainda na aba de instâncias, selecione a instância, clique em "Ações","Imagem e modelo" e "Criar imagem";<br>
+> De um nome e uma descrição a imagem;<br>
+Não reinicializar: habilitado;<br>
+Volume: mantido no padrão;<br>
+Marcar imagem e snapshots juntos;<br>
 
+---
 ### Configuraçao do load balancer
-Busque pelo serviço de ec2 e va até balanceadores de carga;<br>
-Bbs: para o load balancer funcionar com o Auto Scaling, foi mudado de classic para application load balancer;<br>
-Na aba ao lado clique em grupos de destino e em criar grupo de destino; <br>
+Busque pelo serviço de ec2 e vá até "Balanceadores de carga";
+<br>
+Obs: para o load balancer funcionar com o Auto Scaling, foi mudado de classic para application load balancer;<br>
+<br>Na aba ao lado clique em grupos de destino e em criar grupo de destino; <br>
 Configurações do **grupo de destino**:<br>
-Tipo de destino: instâncias;<br>
+> Tipo de destino: instâncias;<br>
 De um nome ao grupo de destino;<br>
 Protocolo: HTTP Porta: 80;<br>
 Tipo de endereço IP: IPv4;<br>
@@ -119,29 +127,25 @@ Configurações avançadas de verificação de integridade sao os padrões;<br>
 Selecione as intâncias e as adicione na porta 80;<br>
 
 Na mesma aba ao lado selecione "Load Balancer" e em "criar load balancer".<br>
-Configurações: <br>
-Crie um application Load Balancer;<br>
+> Crie um "Aplication Load Balancer";<br>
 De um nome ao load balancer;<br>
-Voltado a internet;<br>
+Voltado a internet: Habilitado;<br>
 Tipo de endereço IP IPv4;<br>
 Selecione a VPC;<br>
 Grupo de segurança: selecione apenas o próprio security group criado para o load balancer;<br>
-Listener: protocolo http porta 80 grupo de destino criado anteriormente;<br>
 AWS Global Accelerator: destivado;<br>
-<br>**Crie uma imagem da instância**<br>
-Ainda na aba de instâncias, clique em "Ações","Imagem e modelo" e "Criar imagem";<br>
-De um nome e uma descrição a imagem;<br>
-Não reinicializar: habilitado;<br>
-Volume: mantido no padrão;<br>
-Marcar imagem e snapshots juntos;<br>
+Listener: protocolo http, porta 80 e grupo de destino é o criado anteriormente;<br>
 
-**configuração do auto scaling**<br>
-Ainda no serviço EC2 na aba ao lado busque por Auto Scaling Group que estara na ultima opção, ao entrar clique em "Criar grupo de Auto Scaling";<br>
-configuração:
+![Captura de tela 2024-01-10 011701](https://github.com/Jonata03/PPT-2/assets/120826522/c48e3fef-35be-4940-a8d8-1da0a62c5a52)
+
+---
+
+### Configuração do Auto scaling
+Ainda no serviço EC2 na aba ao lado procure por Auto Scaling Group que estará na última opção, clique em "Criar grupo de Auto Scaling";<br>
 De um nome ao auto scalling;<br>
 clique em "Criar um modelo de execução";<br>
 **configurações do modelo de execução**<br>
-De um nome e uma descriao ao modelo;<br>
+> De um nome e uma descriao ao modelo;<br>
 Fornecer orientação para me ajudar a configurar um modelo que eu possa usar com o Auto Scaling do EC2: habilitado;<br>
 Minha AMIs e selecione a imagem criada anteriormente;<br>
 Tipo de instancia: t2.micro;<br>
@@ -154,7 +158,23 @@ clique na seta circular que esta ao lado do modelo de execuçao para recarregar 
 selecione o modelo recem criado e em "proximo";
 em VPC escolha a vpc que estamos usando para o projeto;
 zonas de disponibilidade e sub-redes: selecione todas as publicas;
+Anexar a um balanceador de carga existente;
+Escolha entre seus grupos de destino de balanceador de carga;
+Grupos de destino de balanceador de carga existentes: selecione o load balancing que ja havia sido criado;
+Serviço VPC Lattice não disponível;
+Ative as verificações de integridade do Elastic Load Balancing: Habilitado;
+Período de tolerância da verificação de integridade: 300 segundos;
+Habilitar coleta de métricas de grupo no CloudWatch: Desabilitado
+Habilitar aquecimento de instâncias padrão: Desabilitado;
+Capacidade desejada: 1;
+Capacidade mínima desejada: 1
+Capacidade máxima desejada: 5
+Ajuste de escala automática: Nenhuma política;
+Proteção contra redução da escala de instâncias na horizontal: Desabilitado;
+Sem notifição;
+Sem tags;
 
+---
 
 DOCKER
 

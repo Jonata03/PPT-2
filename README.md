@@ -3,23 +3,25 @@
 ## AWS
 
 ### Criação da VPC<br>  
-Busque pelo serviço de VPC e selecione "Criar VPC", segue as configurações utilizadas.<br>
-> Recursos a serem criados: VPC e muito mais;<br>
-Geração automática da etiqueta de nome: habilitado; <br>
-Atribua um nome as etiquetas;<br>
-Bloco CIDR IPv4: 10.0.0.0/16;<br>
-Nenhum bloco CIDR IPv6;<br>
-Locação: Padrão;<br>
-Número de AZs: 2;<br>
-Número de sub-redes públicas: 2;<br>
-Número de sub-redes privadas: 2;<br>
-Gateways NAT(USD): 1 por AZ;<br>
-Endpoints da VPC: nenhum;<br>
-Habilitar nomes de host DNS: habilitado;<br>
-Habilitar resolução de DNS: habilitado;<br>
+Busque pelo serviço de VPC e selecione "Criar VPC". Seguem as configurações utilizadas:
+> Recursos a serem criados: VPC e muito mais;
+Geração automática da etiqueta de nome: habilitado;
+Atribua um nome às etiquetas;
+Bloco CIDR IPv4: 10.0.0.0/16;
+Nenhum bloco CIDR IPv6;
+Locação: Padrão;
+Número de AZs: 2;
+Número de sub-redes públicas: 2;
+Número de sub-redes privadas: 2;
+Gateways NAT (USD): 1 por AZ;
+Endpoints da VPC: nenhum;
+Habilitar nomes de host DNS: habilitado;
+Habilitar resolução de DNS: habilitado;
+![Captura de tela 2024-01-10 082904](https://github.com/Jonata03/PPT-2/assets/120826522/e78ca1f3-29f6-4f55-a04f-6642218d546a)
+
 
 ### Configuração dos security groups<br>
-No total usados foram 3 securitys groups para evitar conflitos com portas e regras.<br>
+No total, foram usados 3 security groups para evitar conflitos com portas e regras.<br>
 - Security group para o **load balancer**: Regras de entrada e saida para a porta 80 e 443 com origem de todo ipv4.
   ![Captura de tela 2024-01-10 002037](https://github.com/Jonata03/PPT-2/assets/120826522/24c8a25b-8125-480f-9090-25a83e8a761f)
 
@@ -32,40 +34,38 @@ No total usados foram 3 securitys groups para evitar conflitos com portas e regr
 ---
 ### Criação do RDS 
 Busque pelo serviço de RDS, selecione "Banco de dados" e "Criar banco de dados", segue as configurações:<br>
-> Método de criação padrão;<br>
-Mecanismo de MySQL;<br>
-Mostrar versões compatíveis com o cluster de banco de dados Multi-AZ: Desabilitado;<br>
-Mostrar versões compatíveis com as gravações otimizadas do Amazon RDS: Desabilitado;<br>
-Versão: MySQL 8.0.31;<br>
-Modelo: Nivel gratuito;<br>
-De um nome de identificação, usuario e senha;<br>
-Mostrar classes de instância compatíveis com gravações otimizadas do Amazon RDS: Desabilitado;<br>
-Incluir as classes de geração anteriores: Desabilitado;<br>
-Classe:  db.t3.micro;<br>
-Tipo armazenamento: SSD de uso geral (gp2);<br>
-Armazenamento: alocado 20 gb;<br>
-Não conectar a um recurso de computação do EC2;<br>
-Tipo de rede: IPv4;<br>
-VPC: mesma criada no inicio;<br>
-Sub-rede de banco de dados: default;<br>
-Acesso público: sim;<br>
-Grupo de segurança: apenas o grupo de segurança criado para o RDS;<br>
-Zona de disponiblidade: Sem preferência;<br>
-Sem proxy;<br>
-porta do banco de dados: 3306;<br>
-Autentificação por senha;<br>
-De um nome ao banco de dados;<br>
-Grupo de parâmetros do banco de dados: Default;<br>
-Grupo de opções: Default;<br>
-Sem backup e criptografia;<br>
-Proteção contra exclusão: Habilitado;<br>
-Pontos de Atenção: ficar atento ao identificador do DB, Senha, VPC, Segurity group e ao nome do banco de dados.<br>
+> Método de criação padrão;
+Mecanismo do MySQL;
+Mostrar versões compatíveis com o cluster de banco de dados Multi-AZ: Desabilitado;
+Mostrar versões compatíveis com as gravações otimizadas do Amazon RDS: Desabilitado;
+Versão: MySQL 8.0.31;
+Modelo: Nível gratuito;
+De um nome de identificação, usuário e senha;
+Mostrar classes de instância compatíveis com gravações otimizadas do Amazon RDS: Desabilitado;
+Incluir as classes de geração anteriores: Desabilitado;
+Classe: db.t3.micro;
+Tipo de armazenamento: SSD de uso geral (gp2);
+Armazenamento: alocado 20 GB;
+Não conectar a um recurso de computação do EC2;
+Tipo de rede: IPv4;
+VPC: mesma criada no início;
+Sub-rede de banco de dados: padrão;
+Acesso público: sim;
+Grupo de segurança: apenas o grupo de segurança criado para o RDS;
+Zona de disponibilidade: Sem preferência;
+Sem proxy;
+Porta do banco de dados: 3306;
+Autentificação por senha;
+De um nome ao banco de dados;
+Grupo de parâmetros do banco de dados: Default;
+Grupo de opções: Default;
+Sem backup e criptografia;
+Proteção contra exclusão: Habilitado;
 ---
-
+Pontos de Atenção: ficar atento ao identificador do DB, Senha, VPC, Security group e ao nome do banco de dados.
 ### Instância ec2 
-Busque pelo serviço EC2, vá em "Instâncias" e em "Executar Instâncias"<br>
-> Criando instância:<br>
-Adicione as tags necessarias;<br>
+Busque pelo serviço EC2, vá em "Instâncias" e em "Executar Instâncias". Criando instância:
+> Adicione as tags necessarias;<br>
 Em inicio rápido selecione Amazon Linux AWS;<br>
 Tipo de instância: t2.micro;<br>
 Em par de chaves selecione "Criar novo par de chaves", de um nome ,tipo RSA e em formato .pem(faça o dowload e deixe na sua maquina);<br>
@@ -156,18 +156,19 @@ De um nome ao auto scalling;<br>
 clique em "Criar um modelo de execução";<br>
 **configurações do modelo de execução**<br>
 > De um nome e uma descriao ao modelo;<br>
+
 Fornecer orientação para me ajudar a configurar um modelo que eu possa usar com o Auto Scaling do EC2: habilitado;<br>
 Minha AMIs e selecione a imagem criada anteriormente;<br>
 Tipo de instancia: t2.micro;<br>
 Par de chaves: selecione a mesma par de chave ja criada;<br>
-sub-rede: escolha uma sub-rede publica na regiao desejada;<br>
+Sub-rede: escolha uma sub-rede publica na regiao desejada;<br>
 Grupos de segurança: security group criado anteriormente para instâncias ec2 e RDS, selecione os 2 security group;<br>
-volume: mantem padrão;<br>
+Volume: mantem padrão;<br>
 Retorne para a aba do navegador de estavamos criando o auto scaling;<br>
 clique na seta circular que esta ao lado do modelo de execuçao para recarregar os modelos;<br>
-selecione o modelo recem criado e em "proximo";<br>
-em VPC escolha a vpc que estamos usando para o projeto;<br>
-zonas de disponibilidade e sub-redes: selecione todas as publicas;<br>
+Selecione o modelo recem criado e em "proximo";<br>
+Em VPC escolha a vpc que estamos usando para o projeto;<br>
+Zonas de disponibilidade e sub-redes: selecione todas as publicas;<br>
 Anexar a um balanceador de carga existente;<br>
 Escolha entre seus grupos de destino de balanceador de carga;<br>
 Grupos de destino de balanceador de carga existentes: selecione o load balancing que ja havia sido criado;<br>
@@ -182,7 +183,7 @@ Capacidade máxima desejada: 5;<br>
 Ajuste de escala automática: Nenhuma política;<br>
 Proteção contra redução da escala de instâncias na horizontal: Desabilitado;<br>
 Sem notifição;<br>
-Sem tags;<br>
+Importante:adicione as mesmas tags que foram usadas na instância ec2;<br>
 
 ---
 ## DOCKER
@@ -190,15 +191,15 @@ Conectando-se a sua intância via ssh ou através do console, log com seu usuár
 ```
 mkdir /docker
 ```
-entre no diretorio recem criado com o comando 
+Entre no diretório recém-criado com o comando:
 ```
 cd /docker/
 ```
-crie um arquivo .yml com o editor de texto de sua preferência
+Crie um arquivo .yml com o editor de texto de sua preferência:
 ```
 nano docker-compose.yml
 ```
-segue o scrip usado para a criação do container
+Segue o script usado para a criação do container:
 ```
 version: '3'
 
@@ -222,13 +223,10 @@ salve e saia, use
 ```
 docker-compose up
 ```
-para subir o container, a imagem sera baixada do docker hub então pode ser que demore um pouco.
-  Para acessar pelo navegador o site wordpress va até o load balancing usado no projeto e copie o Nome do DNS
+para subir o container, a imagem será baixada do docker hub então pode ser que demore um pouco. Para acessar pelo navegador o site WordPress vá até o load balancing usado no projeto e copie o Nome do DNS.
 ![Captura de tela 2024-01-10 023521](https://github.com/Jonata03/PPT-2/assets/120826522/2f964a58-ecfd-457c-8c91-d7c4779855a2)
 
-cole na barra de busca URL do seu navegador, voce sera direcionado para a pagina do de instalação do wordpress segue segue um exemplo de uso
- escolha um idioma e você será redirecionado para
-
+Cole na barra de busca URL do seu navegador, você será direcionado para a página de instalação do WordPress.
 ![Captura de tela 2024-01-10 024926](https://github.com/Jonata03/PPT-2/assets/120826522/5542d842-6dc5-4c5d-b501-4e6cb57c59b6)
 
 preencha as informações como desejado porém lembre das informações usadas

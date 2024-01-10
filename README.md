@@ -1,9 +1,10 @@
-Documentaçao de atividade 2<br>
+# Documentação de atividade 2
 
-AWS<br>
-**Criação da VPC**<br>
-Busque pelo serviço de VPC e selecione "Criar VPC" segue as configurações utilizadas.<br>
-Recursos a serem criados: VPC e muito mais;<br>
+## AWS
+
+### Criação da VPC<br>  
+Busque pelo serviço de VPC e selecione "Criar VPC", segue as configurações utilizadas.<br>
+> Recursos a serem criados: VPC e muito mais;<br>
 Geração automática da etiqueta de nome: habilitado; <br>
 Atribua um nome as etiquetas;<br>
 Bloco CIDR IPv4: 10.0.0.0/16;<br>
@@ -17,14 +18,11 @@ Endpoints da VPC: nenhum;<br>
 Habilitar nomes de host DNS: habilitado;<br>
 Habilitar resolução de DNS: habilitado;<br>
 
-**Configuração dos security groups**<br>
+### Configuração dos security groups<br>
 No total usados foram 3 securitys groups para evitar conflitos com portas e regras.<br>
-
-Security group para o **load balancer**: Regras de entrada e saida para a porta 80 com origem de todo ipv4.<br>
-  
-Security group para **instâncias ec2**: Regras de entrada e saida na porta 22 com origem de qualquer IPv4, porta 80 com origem do security group do load balancer.<br>
-    
-Security group para **RDS**: Regras de entrada e saida na porta 3306 com o origem de todo ipv4<br>
+- Security group para o **load balancer**: Regras de entrada e saida para a porta 80 com origem de todo ipv4.<br>
+- Security group para **instâncias ec2**: Regras de entrada e saida na porta 22 com origem de qualquer IPv4, porta 80 com origem do security group do load balancer.<br>
+- Security group para **RDS**: Regras de entrada e saida na porta 3306 com o origem de todo ipv4<br>
 
 **Criação do RDS**<br>
 Busque pelo serviço de RDS, selecione "Banco de dados" e "Criar banco de dados", segue as configurações:<br>

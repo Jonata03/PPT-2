@@ -20,13 +20,19 @@ Habilitar resolução de DNS: habilitado;<br>
 
 ### Configuração dos security groups<br>
 No total usados foram 3 securitys groups para evitar conflitos com portas e regras.<br>
-- Security group para o **load balancer**: Regras de entrada e saida para a porta 80 com origem de todo ipv4.<br>
-- Security group para **instâncias ec2**: Regras de entrada e saida na porta 22 com origem de qualquer IPv4, porta 80 com origem do security group do load balancer.<br>
-- Security group para **RDS**: Regras de entrada e saida na porta 3306 com o origem de todo ipv4<br>
+- Security group para o **load balancer**: Regras de entrada e saida para a porta 80 e 443 com origem de todo ipv4.
+  ![Captura de tela 2024-01-10 002037](https://github.com/Jonata03/PPT-2/assets/120826522/24c8a25b-8125-480f-9090-25a83e8a761f)
 
-**Criação do RDS**<br>
+- Security group para **instâncias ec2**: Regras de entrada e saida na porta 22 e 2049 com origem de qualquer IPv4, porta 80 com origem do security group do load balancer.
+
+  ![Captura de tela 2024-01-10 001630](https://github.com/Jonata03/PPT-2/assets/120826522/1f8afde2-6b52-4702-be88-92263c4ba06f)
+
+- Security group para **RDS**: Regras de entrada e saida na porta 3306 com o origem de todo ipv4<br>
+  ![Captura de tela 2024-01-10 002642](https://github.com/Jonata03/PPT-2/assets/120826522/7cb6442f-62fc-4615-a5d4-20e04bed6f33)
+---
+### Criação do RDS 
 Busque pelo serviço de RDS, selecione "Banco de dados" e "Criar banco de dados", segue as configurações:<br>
-Método de criação padrão;<br>
+> Método de criação padrão;<br>
 Mecanismo de MySQL;<br>
 Mostrar versões compatíveis com o cluster de banco de dados Multi-AZ: Desabilitado;<br>
 Mostrar versões compatíveis com as gravações otimizadas do Amazon RDS: Desabilitado;<br>
@@ -54,19 +60,19 @@ Grupo de opções: Default;<br>
 Sem backup e criptografia;<br>
 Proteção contra exclusão: Habilitado;<br>
 Pontos de Atenção: ficar atento ao identificador do DB, Senha, VPC, Segurity group e ao nome do banco de dados.<br>
-
-<br>**Criação do efs**:<br>
-Busque pelo serviço nfs, clique em criar sistema de arquivos e em personalizar, segue as configurações usadas:
-tipo de sistema: regional<br>
+---
+### Criação do efs
+Busque pelo serviço NFS, clique em "Criar sistema de arquivos" e em "Personalizar", segue as configurações usadas:
+> tipo de sistema: regional<br>
 backups automaticos: desabilitados<br>
 ciclo de vida, mantém padrao<br>
 criptografia: desabilitada<br>
 modo de taxa de transferência avançado e elastic<br>
 rede:selecionada a mesma vpc padrao do projeto com as duas zonas selecionadas<br>
 
-**Instância ec2**<br>
+### Instância ec2 
 Busque pelo serviço EC2, vá em "Instâncias" e em "Executar Instâncias"<br>
-Criando instância:<br>
+> Criando instância:<br>
 Adicione as tags necessarias;<br>
 Em inicio rápido selecione Amazon Linux AWS;<br>
 Tipo de instância: t2.micro;<br>
@@ -77,8 +83,15 @@ Uma subnet publica na regiao desejada;<br>
 Atribuir IP público automaticamente: Habilitado;<br>
 Grupos de segurança: security group criado anteriormente para instâncias ec2 e RDS, selecione os 2 security group;<br>
 As configuraçoes apartir do armazenamento foi mantido no padrão;<br>
-Na parte inferior da ultima aba de configuração havera um quadrado pra digitar algum script, segue o script usado para ja iniciar a intância configurada;<br>
-<br>*#!/bin/bash<br>
+
+Na parte inferior da última aba de configuração havera um quadrado de digitação onde se deve colocar um script para que sua intância inicie configurada, 
+
+![Captura de tela 2024-01-10 004322](https://github.com/Jonata03/PPT-2/assets/120826522/b06e8ce3-403b-4fd9-8e01-63f551c2f119)
+
+segue o script usado para iniciar a intância;
+
+```
+#!/bin/bash<br>
 sudo yum update -y<br>
 sudo yum install -y docker<br>
 sudo service docker start<br>
@@ -86,9 +99,10 @@ sudo systemctl enable docker<br>
 sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose<br>
 sudo chmod +x /usr/local/bin/docker-compose<br>
 docker --version<br>
-docker-compose --version*<br>
+docker-compose --version
+```
 
-**Configuraçao do load balancer**<br>
+### Configuraçao do load balancer
 Busque pelo serviço de ec2 e va até balanceadores de carga;<br>
 Bbs: para o load balancer funcionar com o Auto Scaling, foi mudado de classic para application load balancer;<br>
 Na aba ao lado clique em grupos de destino e em criar grupo de destino; <br>

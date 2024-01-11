@@ -34,33 +34,33 @@ No total, foram usados 3 security groups para evitar conflitos com portas e regr
 ---
 ### Criação do RDS 
 Busque pelo serviço de RDS, selecione "Banco de dados" e "Criar banco de dados", segue as configurações:<br>
-> Método de criação padrão;
-Mecanismo do MySQL;
-Mostrar versões compatíveis com o cluster de banco de dados Multi-AZ: Desabilitado;
-Mostrar versões compatíveis com as gravações otimizadas do Amazon RDS: Desabilitado;
-Versão: MySQL 8.0.31;
-Modelo: Nível gratuito;
-De um nome de identificação, usuário e senha;
-Mostrar classes de instância compatíveis com gravações otimizadas do Amazon RDS: Desabilitado;
-Incluir as classes de geração anteriores: Desabilitado;
-Classe: db.t3.micro;
-Tipo de armazenamento: SSD de uso geral (gp2);
-Armazenamento: alocado 20 GB;
-Não conectar a um recurso de computação do EC2;
-Tipo de rede: IPv4;
-VPC: mesma criada no início;
-Sub-rede de banco de dados: padrão;
-Acesso público: sim;
-Grupo de segurança: apenas o grupo de segurança criado para o RDS;
-Zona de disponibilidade: Sem preferência;
-Sem proxy;
-Porta do banco de dados: 3306;
-Autentificação por senha;
-De um nome ao banco de dados;
-Grupo de parâmetros do banco de dados: Default;
-Grupo de opções: Default;
-Sem backup e criptografia;
-Proteção contra exclusão: Habilitado;
+> Método de criação padrão;<br>
+Mecanismo do MySQL;<br>
+Mostrar versões compatíveis com o cluster de banco de dados Multi-AZ: Desabilitado;<br>
+Mostrar versões compatíveis com as gravações otimizadas do Amazon RDS: Desabilitado;<br>
+Versão: MySQL 8.0.31;<br>
+Modelo: Nível gratuito;<br>
+De um nome de identificação, usuário e senha;<br>
+Mostrar classes de instância compatíveis com gravações otimizadas do Amazon RDS: Desabilitado;<br>
+Incluir as classes de geração anteriores: Desabilitado;<br>
+Classe: db.t3.micro;<br>
+Tipo de armazenamento: SSD de uso geral (gp2);<br>
+Armazenamento: alocado 20 GB;<br>
+Não conectar a um recurso de computação do EC2;<br>
+Tipo de rede: IPv4;<br>
+VPC: mesma criada no início;<br>
+Sub-rede de banco de dados: padrão;<br>
+Acesso público: sim;<br>
+Grupo de segurança: apenas o grupo de segurança criado para o RDS;<br>
+Zona de disponibilidade: Sem preferência;<br>
+Sem proxy;<br>
+Porta do banco de dados: 3306;<br>
+Autentificação por senha;<br>
+De um nome ao banco de dados;<br>
+Grupo de parâmetros do banco de dados: Default;<br>
+Grupo de opções: Default;<br>
+Sem backup e criptografia;<br>
+Proteção contra exclusão: Habilitado;<br>
 ---
 Pontos de Atenção: ficar atento ao identificador do DB, Senha, VPC, Security group e ao nome do banco de dados.
 ### Instância ec2 
@@ -102,12 +102,12 @@ Marcar imagem e snapshots juntos;<br>
 ---
 ### Criação do EFS
 Busque pelo serviço NFS, clique em "Criar sistema de arquivos" e em "Personalizar", segue as configurações usadas:
-> tipo de sistema: regional<br>
-backups automaticos: desabilitados<br>
-ciclo de vida, mantém padrao<br>
-criptografia: desabilitada<br>
-modo de taxa de transferência avançado e elastic<br>
-rede:selecionada a mesma vpc padrao do projeto com as duas zonas selecionadas<br>
+> tipo de sistema: regional;<br>
+backups automaticos: desabilitados;<br>
+ciclo de vida, mantém padrao;<br>
+criptografia: desabilitada;<br>
+modo de taxa de transferência avançado e elastic;<br>
+rede:selecionada a mesma vpc padrao do projeto com as duas zonas selecionadas;<br>
 
 Conecte-se com sua intância EC2 e entre com usuario root, use o comando 
 ```
@@ -156,7 +156,6 @@ De um nome ao auto scalling;<br>
 clique em "Criar um modelo de execução";<br>
 **configurações do modelo de execução**<br>
 > De um nome e uma descriao ao modelo;<br>
-
 Fornecer orientação para me ajudar a configurar um modelo que eu possa usar com o Auto Scaling do EC2: habilitado;<br>
 Minha AMIs e selecione a imagem criada anteriormente;<br>
 Tipo de instancia: t2.micro;<br>
